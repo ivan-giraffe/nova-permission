@@ -5,6 +5,7 @@ namespace Vyuldashev\NovaPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
@@ -105,6 +106,8 @@ class Role extends Resource
             DateTime::make(__('nova-permission-tool::roles.updated_at'), 'updated_at')->exceptOnForms(),
 
             PermissionBooleanGroup::make(__('nova-permission-tool::roles.permissions'), 'permissions'),
+
+            BelongsToMany::make('Petitions'),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
                 ->searchable()
